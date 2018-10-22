@@ -17,13 +17,30 @@ import seaborn as sns
 # parsers.<function name> notation as in: 
 # parsers.countWordsUnstructured('./state-of-the-union-corpus-1989-2017/Bush_1989.txt')
 
-#import parsers.py
+import parsers.py
 
 ####################################################
 # Part 1
 ####################################################
 
-#def populateDatabase(databaseName, wordCounts, metaData):
+    
+
+def populateDatabase(databaseName, wordCounts, metaData):
+    conn = sqlite3.connect(databaseName)
+    c = conn.cursor()
+    for file in wordCounts:
+        for word in file:
+            c.execute(''' INSERT INTO SOTUWordCount_DT(filename, Word, Count) values ({0},{1},{2})'''
+            c.execute( '''INSERT INTO US_Presidents_DT(Index, number, start, end, president, prior, party, Vice) values({0},{1},{2},{3},{4},{5},{6},{7},{8})'''
+    c.execute()    
+    conn.commit() 
+    conn.close()
+    return 0
+
+
+                      
+populateDatabase("POTUS_SOTU.db", wordCounts)
+    
     # Write a function that will populate your database
     # with the contents of the word counts and us_presidents.csv
     # to your database. 

@@ -6,6 +6,10 @@
 
 import csv
 import pandas as pd
+import sqlite3
+import os
+from os import listdir
+from os import chdir
 
 wordcount = {}
 
@@ -42,9 +46,6 @@ generateSimpleCSV('wordcounts.csv', wordcount)
 # PART 3
 ################################################################################
 
-import os
-from os import listdir
-from os import chdir
 
 def countWordsMany(directory): 
     dir_list = os.listdir(directory)
@@ -88,37 +89,37 @@ generateJSONFile(all_dicts,'targetfile.json')
 # PART 6
 ################################################################################
 def searchCSV(csvfile, word): 
-    largest_file= ""
-    largest_count=0
-    with open(csvfile, 'rt') as csv_file:
-        file_read = csv.reader(csv_file, delimiter = ',')
-        for line in file_read:
-            if line[1] == word:
-                if int(line[2]) > largest_count:
-                    largest_count=int(line[2])
-                    largest_file=line[0]
-      
-        return largest_file
+#    largest_file= ""
+#    largest_count=0
+#    with open(csvfile, 'rt') as csv_file:
+#        file_read = csv.reader(csv_file, delimiter = ',')
+#        for line in file_read:
+#            if line[1] == word:
+#                if int(line[2]) > largest_count:
+#                    largest_count=int(line[2])
+#                    largest_file=line[0]
+#      
+#        return largest_file
         
         
-print(searchCSV("targetfile.csv", "Congress"))
+#print(searchCSV("targetfile.csv", "Congress"))
 
-import json
+#import json
 
-def searchJSON(JSONfile, word): 
-    largest_file= ""
-    largest_count=0
-    with open(JSONfile) as json_file:
-        read_data= json.load(json_file, delimiter = ':')
-        for file in read_data:
-            if word in read_data[file] and read_data[file][word] > largest_count:
-                largest_count=read_data[file][word]
-                largest_file=file
-        return largest_file
-        json_file.close()
+#def searchJSON(JSONfile, word): 
+#    largest_file= ""
+#    largest_count=0
+#    with open(JSONfile) as json_file:
+#        read_data= json.load(json_file, delimiter = ':')
+#        for file in read_data:
+#            if word in read_data[file] and read_data[file][word] > largest_count:
+#                largest_count=read_data[file][word]
+#                largest_file=file
+#        return largest_file
+#        json_file.close()
 
 
-print(searchJSON("targetfile.json", "Congress"))
+#print(searchJSON("targetfile.json", "Congress"))
     
 
     
@@ -142,8 +143,6 @@ print(searchJSON("targetfile.json", "Congress"))
 
 
 #The tables can be joined by the president's name, and the date of speech/date of presidency. 
-
-import sqlite3
 
 conn = sqlite3.connect('POTUS_SOTU.db')
 c = conn.cursor()
